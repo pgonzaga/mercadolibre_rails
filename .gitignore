@@ -4,3 +4,4 @@ pkg/
 .idea/
 *.swp
 .DS_Store
+*.gem
