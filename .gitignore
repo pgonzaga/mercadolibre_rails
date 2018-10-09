@@ -7,3 +7,5 @@ pkg/
 *.gem
 *.log
 .byebug_history
+spec/dummy/**/*.log
+spec/dummy/**/*.sqlite3
