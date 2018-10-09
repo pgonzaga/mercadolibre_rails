@@ -5,3 +5,5 @@ pkg/
 *.swp
 .DS_Store
 *.gem
+*.log
+.byebug_history

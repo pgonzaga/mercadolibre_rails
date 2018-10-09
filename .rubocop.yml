@@ -15,3 +15,8 @@ Style/Documentation:
 
 Style/MixinUsage:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - db/migrate/**/*.rb
+    - spec/**/*.rb

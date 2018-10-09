@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_004_024_455) do
+ActiveRecord::Schema.define(version: 20_181_004_150_308) do
+  create_table 'mercadolibre_rails_products', force: :cascade do |t|
+    t.string 'mercadolibre_id', null: false
+    t.string 'title'
+    t.decimal 'price', precision: 8, scale: 2
+    t.string 'currency_code'
+    t.integer 'sold_quantity', default: 0
+    t.text 'description'
+    t.string 'status', default: 'sync_needed'
+    t.decimal 'latitude', precision: 10, scale: 6
+    t.decimal 'longitude', precision: 10, scale: 6
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'site_id'
+    t.integer 'seller_id'
+    t.index ['mercadolibre_id'], name: 'index_mercadolibre_rails_products_on_mercadolibre_id', unique: true
+    t.index ['seller_id'], name: 'index_mercadolibre_rails_products_on_seller_id'
+    t.index ['site_id'], name: 'index_mercadolibre_rails_products_on_site_id'
+  end
+
+  create_table 'mercadolibre_rails_sellers', force: :cascade do |t|
+    t.integer 'mercadolibre_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['mercadolibre_id'], name: 'index_mercadolibre_rails_sellers_on_mercadolibre_id', unique: true
+  end
+
   create_table 'mercadolibre_rails_sites', force: :cascade do |t|
     t.string 'code', null: false
     t.boolean 'active', default: true

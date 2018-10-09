@@ -14,11 +14,7 @@ gem 'mercadolibre_rails'
 And then execute:
 ```bash
 $ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install mercadolibre_rails
+$ rails db:migrate
 ```
 
 ## Contributing

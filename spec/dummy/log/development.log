@@ -37,3 +37,14 @@ Migrating to CreateMercadolibreRailsSites (20181004024455)
   ↳ bin/rails:4
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/pgonzaga/.rvm/gems/ruby-2.4.3@global/gems/rake-12.3.1/lib/rake/task.rb:271
+Migrating to CreateMercadolibreRailsSites (20181003152541)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/pgonzaga/.rvm/gems/ruby-2.4.3@global/gems/rake-12.3.1/lib/rake/task.rb:271
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ /Users/pgonzaga/repositories/mercadolibre_rails/db/migrate/20181003152541_create_mercadolibre_rails_sites.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "mercadolibre_rails_sites" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "code" varchar NOT NULL, "active" boolean DEFAULT 1, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ /Users/pgonzaga/repositories/mercadolibre_rails/db/migrate/20181003152541_create_mercadolibre_rails_sites.rb:3
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ /Users/pgonzaga/.rvm/gems/ruby-2.4.3@global/gems/rake-12.3.1/lib/rake/task.rb:271
