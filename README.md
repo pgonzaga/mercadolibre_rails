@@ -17,6 +17,10 @@ $ bundle
 $ rails db:migrate
 ```
 
+## Integrations
+
+- This gem has paper_trail integrarion for some models such `Product` for example (store in DB the last 2500 model versions).
+
 ## Contributing
 Contribution directions go here.
 

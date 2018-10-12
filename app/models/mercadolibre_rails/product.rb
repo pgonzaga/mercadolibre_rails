@@ -1,7 +1,11 @@
 require 'mercadolibre_api'
+require 'paper_trail'
 
 module MercadolibreRails
   class Product < ApplicationRecord
+    PAPER_TRAIL_VERSION_LIMIT = 2500
+    has_paper_trail class_name: 'MercadolibreRails::Version', on: :update, ignore: %i[created_at updated_at]
+
     belongs_to :seller, optional: true
     belongs_to :site, optional: true
 

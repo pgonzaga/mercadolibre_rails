@@ -1,6 +1,7 @@
 RSpec.describe MercadolibreRails::Product, type: :model do
   let(:product_url) { 'https://articulo.mercadolibre.com.uy/MLU-445121140-masajeador-anti' }
   subject { create(:mercadolibre_product) }
+  let(:mercadolibre_product) { create(:mercadolibre_product, mercadolibre_id: 'MLU445121140') }
 
   it { is_expected.to validate_presence_of :mercadolibre_id }
   it { is_expected.to validate_uniqueness_of(:mercadolibre_id).scoped_to(:site_id) }
@@ -24,8 +25,9 @@ RSpec.describe MercadolibreRails::Product, type: :model do
   end
 
   describe '#update_metadata' do
+    before { mercadolibre_product }
+
     it 'updates metadta on creation' do
-      create(:mercadolibre_product, mercadolibre_id: 'MLU445121140')
       created_product = MercadolibreRails::Product.last
 
       expect(created_product.seller.mercadolibre_id).to eq(150_040_477)
@@ -37,6 +39,17 @@ RSpec.describe MercadolibreRails::Product, type: :model do
       expect(created_product.status).to_not be_nil
       expect(created_product.latitude).to eq(-34.90506)
       expect(created_product.longitude).to eq(-56.19482)
+    end
+  end
+
+  describe 'paper_trail integration works' do
+    before { mercadolibre_product }
+
+    it 'creates a product version on update' do
+      expect { mercadolibre_product.update(sold_quantity: 180) }
+        .to change { mercadolibre_product.versions.count }.by(1)
+
+      expect(mercadolibre_product.versions.last.changeset).to eq('sold_quantity' => [130, 180])
     end
   end
 end

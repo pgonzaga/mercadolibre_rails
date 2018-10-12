@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_004_150_308) do
+ActiveRecord::Schema.define(version: 20_181_010_142_221) do
   create_table 'mercadolibre_rails_products', force: :cascade do |t|
     t.string 'mercadolibre_id', null: false
     t.string 'title'
@@ -43,5 +43,16 @@ ActiveRecord::Schema.define(version: 20_181_004_150_308) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['code'], name: 'index_mercadolibre_rails_sites_on_code', unique: true
+  end
+
+  create_table 'mercadolibre_rails_versions', force: :cascade do |t|
+    t.string 'item_type', null: false
+    t.integer 'item_id', null: false
+    t.string 'event', null: false
+    t.string 'whodunnit'
+    t.text 'object', limit: 1_073_741_823
+    t.datetime 'created_at'
+    t.text 'object_changes', limit: 1_073_741_823
+    t.index %w[item_type item_id], name: 'index_mercadolibre_rails_versions_on_item_type_and_item_id'
   end
 end
