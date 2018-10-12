@@ -14,6 +14,7 @@ module MercadolibreRails
 
     delegate :code, to: :site, prefix: true
     after_create_commit :update_metadata
+    has_many :pictures, dependent: :destroy, class_name: 'MercadolibreRails::Picture'
 
     def self.create_from(url:)
       ml_id = MercadolibreApi::Products::Queries::GetID.run!(product_url: url)
@@ -25,14 +26,19 @@ module MercadolibreRails
       mercadolibre_site.products.find_or_create_by!(mercadolibre_id: ml_id)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def update_metadata
       ml_product = MercadolibreApi::Products::Queries::Find.run!(product_id: mercadolibre_id)
       ml_seller = Seller.find_or_create_by!(mercadolibre_id: ml_product[:seller_id])
+      pictures.destroy_all
 
       update!(seller: ml_seller, title: ml_product[:title], price: ml_product[:price],
               currency_code: ml_product[:currency_id], sold_quantity: ml_product[:sold_quantity],
               description: ml_product[:description], status: ml_product[:status],
               latitude: ml_product.dig(:geolocation, :latitude), longitude: ml_product.dig(:geolocation, :longitude))
+
+      ml_product[:pictures].each { |picture| pictures.create!(url: picture[:url]) }
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end

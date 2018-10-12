@@ -8,6 +8,7 @@ RSpec.describe MercadolibreRails::Product, type: :model do
   it { is_expected.to belong_to :site }
   it { is_expected.to belong_to :seller }
   it { is_expected.to respond_to :site_code }
+  it { is_expected.to have_many :pictures }
 
   describe '.create_from' do
     it 'creates the product with the right mercadolibre_id' do
@@ -21,6 +22,7 @@ RSpec.describe MercadolibreRails::Product, type: :model do
       created_site = MercadolibreRails::Site.find_by(code: 'MLU')
 
       expect(created_product.site).to eq created_site
+      expect(created_product.pictures.count).to eq 3
     end
   end
 

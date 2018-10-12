@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mercadolibre_rails (0.3)
+    mercadolibre_rails (0.4)
       mercadolibre_api (~> 0.8)
       paper_trail (~> 10.0.1)
       rails (~> 5.2.1)

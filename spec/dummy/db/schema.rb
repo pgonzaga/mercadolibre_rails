@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_010_142_221) do
+ActiveRecord::Schema.define(version: 20_181_012_133_312) do
+  create_table 'mercadolibre_rails_pictures', force: :cascade do |t|
+    t.string 'url', null: false
+    t.integer 'product_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['product_id'], name: 'index_mercadolibre_rails_pictures_on_product_id'
+    t.index ['url'], name: 'index_mercadolibre_rails_pictures_on_url', unique: true
+  end
+
   create_table 'mercadolibre_rails_products', force: :cascade do |t|
     t.string 'mercadolibre_id', null: false
     t.string 'title'
