@@ -29,15 +29,16 @@ module MercadolibreRails
     # rubocop:disable Metrics/AbcSize
     def update_metadata
       ml_product = MercadolibreApi::Products::Queries::Find.run!(product_id: mercadolibre_id)
-      ml_seller = Seller.find_or_create_by!(mercadolibre_id: ml_product[:seller_id])
-      pictures.destroy_all
+      ml_seller = MercadolibreRails::Seller.find_or_create_by!(mercadolibre_id: ml_product[:seller_id])
 
       update!(seller: ml_seller, title: ml_product[:title], price: ml_product[:price],
               currency_code: ml_product[:currency_id], sold_quantity: ml_product[:sold_quantity],
               description: ml_product[:description], status: ml_product[:status],
               latitude: ml_product.dig(:geolocation, :latitude), longitude: ml_product.dig(:geolocation, :longitude))
 
-      ml_product[:pictures].each { |picture| pictures.create!(url: picture[:url]) }
+      ml_product[:pictures].each do |picture|
+        MercadolibreRails::Picture.find_or_create_by!(url: picture[:url], product_id: id)
+      end
     end
     # rubocop:enable Metrics/AbcSize
   end

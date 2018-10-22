@@ -17,6 +17,8 @@ RSpec.describe MercadolibreRails::Product, type: :model do
         .by(1)
         .and change { MercadolibreRails::Site.where(code: 'MLU').count }
         .by(1)
+        .and change { MercadolibreRails::Seller.where(mercadolibre_id: 150_040_477).count }
+        .by(1)
 
       created_product = MercadolibreRails::Product.find_by(mercadolibre_id: 'MLU445121140')
       created_site = MercadolibreRails::Site.find_by(code: 'MLU')
