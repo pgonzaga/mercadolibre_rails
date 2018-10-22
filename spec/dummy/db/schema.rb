@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_012_133_312) do
+ActiveRecord::Schema.define(version: 20_181_022_135_655) do
   create_table 'mercadolibre_rails_pictures', force: :cascade do |t|
     t.string 'url', null: false
     t.integer 'product_id'
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 20_181_012_133_312) do
     t.integer 'mercadolibre_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['mercadolibre_id'], name: 'index_mercadolibre_rails_sellers_on_mercadolibre_id', unique: true
+    t.integer 'site_id'
+    t.index %w[mercadolibre_id site_id], name: 'ml_id_site_id_on_sellers'
+    t.index ['site_id'], name: 'index_mercadolibre_rails_sellers_on_site_id'
   end
 
   create_table 'mercadolibre_rails_sites', force: :cascade do |t|

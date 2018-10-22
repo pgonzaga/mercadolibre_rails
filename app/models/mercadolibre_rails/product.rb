@@ -22,14 +22,14 @@ module MercadolibreRails
 
       return unless ml_id && site_code
 
-      mercadolibre_site = MercadolibreRails::Site.find_or_create_by!(code: site_code)
-      mercadolibre_site.products.find_or_create_by!(mercadolibre_id: ml_id)
+      mercadolibre_site = MercadolibreRails::Site.where(code: site_code).first_or_create
+      mercadolibre_site.products.where(mercadolibre_id: ml_id).first_or_create
     end
 
     # rubocop:disable Metrics/AbcSize
     def update_metadata
       ml_product = MercadolibreApi::Products::Queries::Find.run!(product_id: mercadolibre_id)
-      ml_seller = MercadolibreRails::Seller.find_or_create_by!(mercadolibre_id: ml_product[:seller_id])
+      ml_seller = MercadolibreRails::Seller.where(mercadolibre_id: ml_product[:seller_id], site: site).first_or_create
 
       update!(seller: ml_seller, title: ml_product[:title], price: ml_product[:price],
               currency_code: ml_product[:currency_id], sold_quantity: ml_product[:sold_quantity],
@@ -37,7 +37,7 @@ module MercadolibreRails
               latitude: ml_product.dig(:geolocation, :latitude), longitude: ml_product.dig(:geolocation, :longitude))
 
       ml_product[:pictures].each do |picture|
-        MercadolibreRails::Picture.find_or_create_by!(url: picture[:url], product_id: id)
+        MercadolibreRails::Picture.where(url: picture[:url], product_id: id).first_or_create
       end
     end
     # rubocop:enable Metrics/AbcSize

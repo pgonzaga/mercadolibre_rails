@@ -1,6 +1,7 @@
 RSpec.describe MercadolibreRails::Seller, type: :model do
   let(:product_url) { 'https://articulo.mercadolibre.com.uy/MLU-445121140-masajeador-anti' }
   it { is_expected.to have_many :products }
+  it { is_expected.to belong_to :site }
 
   describe '.create_from' do
     it 'creates the seller with the right mercadolibre_id' do
