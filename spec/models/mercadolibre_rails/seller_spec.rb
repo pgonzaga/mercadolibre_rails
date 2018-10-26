@@ -6,7 +6,10 @@ RSpec.describe MercadolibreRails::Seller, type: :model do
   describe '.create_from' do
     it 'creates the seller with the right mercadolibre_id' do
       expect { described_class.create_from(product_url: product_url) }
-        .to change { MercadolibreRails::Seller.where(mercadolibre_id: 150_040_477).count }.by(1)
+        .to change { MercadolibreRails::Seller.where(mercadolibre_id: 150_040_477).count }
+        .by(1)
+        .and change { MercadolibreRails::Product.count }
+        .from(0)
     end
   end
 end

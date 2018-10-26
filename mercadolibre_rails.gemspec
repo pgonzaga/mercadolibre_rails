@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  s.add_dependency 'mercadolibre_api', '~> 0.9'
+  s.add_dependency 'mercadolibre_api', '~> 0.10'
   s.add_dependency 'paper_trail', '~> 10.0.1'
   s.add_dependency 'rails', '~> 5.2.1'
   s.add_dependency 'redis', '~> 4.0.2'
