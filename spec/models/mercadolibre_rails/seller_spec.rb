@@ -3,6 +3,10 @@ RSpec.describe MercadolibreRails::Seller, type: :model do
   it { is_expected.to have_many :products }
   it { is_expected.to belong_to :site }
 
+  it 'responds to sync all' do
+    expect { described_class.sync_all }.to_not raise_error
+  end
+
   describe '.create_from' do
     it 'creates the seller with the right mercadolibre_id' do
       expect { described_class.create_from(product_url: product_url) }

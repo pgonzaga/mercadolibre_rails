@@ -9,6 +9,9 @@ require 'shoulda-matchers'
 
 ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 
+ActiveJob::Base.queue_adapter = :test
+include ActiveJob::TestHelper
+
 begin
   ActiveRecord::Migrator.migrations_paths = File.join(ENGINE_ROOT, 'spec/dummy/db/migrate')
   ActiveRecord::Migration.maintain_test_schema!
