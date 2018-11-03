@@ -2,7 +2,7 @@ require 'mercadolibre_api'
 
 module MercadolibreRails
   class Seller < ApplicationRecord
-    has_many :products, dependent: :destroy
+    has_many :products, -> { order('sold_quantity desc') }, dependent: :destroy
     belongs_to :site
 
     delegate :code, to: :site, prefix: true
