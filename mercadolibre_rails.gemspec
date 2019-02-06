@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'paper_trail', '~> 10.0.1'
   s.add_dependency 'rails', '~> 5.2.1'
   s.add_dependency 'redis', '~> 4.0.2'
+  s.add_dependency 'rack', '>= 2.0.6'
 
   s.add_development_dependency 'byebug', '~> 10.0.2'
   s.add_development_dependency 'factory_bot_rails', '~> 4.11.1'
